@@ -96,7 +96,7 @@ th{color:var(--muted);font-weight:700;font-size:13px;text-transform:uppercase;le
   <p>French A1.1 oral prep. Built from the class Quizlet sets, the class whiteboards, the course plan and Livre Units 1–3. <span class="count" id="totalWords"></span> words · tap any <span class="phon">🔊</span> to hear it in French.</p>
   <div class="row" style="margin-top:10px">
     <label for="rate" class="muted">Voice speed</label>
-    <input id="rate" type="range" min="0.5" max="1.1" step="0.05" value="0.85" style="width:140px">
+    <input id="rate" type="range" min="0.6" max="1.3" step="0.05" value="1" style="width:140px">
     <span id="voiceInfo" class="muted" style="font-size:13px"></span>
   </div>
 </header>
@@ -573,22 +573,36 @@ timide|shy|tee-MEED`
 };
 
 /* ---------- SPEECH ---------- */
-let frVoice=null;
+// Recorded French audio (female voice) in one sprite file; browser voice only as fallback.
+let SPRITE=null,spriteAudio=null,stopTimer=null,frVoice=null;
+(async()=>{try{const r=await fetch('audio/sprite.json');if(r.ok){SPRITE=await r.json();spriteAudio=new Audio('audio/sprite.m4a');spriteAudio.preload='auto';spriteAudio.preservesPitch=true;document.getElementById('voiceInfo').textContent='Voice: recorded native French (female)'}}catch(e){}})();
 function pickVoice(){
   const vs=speechSynthesis.getVoices().filter(v=>/^fr/i.test(v.lang));
-  frVoice=vs.find(v=>/fr-FR/i.test(v.lang)&&/(Amélie|Thomas|Audrey|Google|Marie|Daniel)/i.test(v.name))||vs.find(v=>/fr-FR/i.test(v.lang))||vs[0]||null;
-  document.getElementById('voiceInfo').textContent=frVoice?('Voice: '+frVoice.name):(('speechSynthesis' in window)?'No French voice found on this device; install one in system settings':'Speech not supported here');
+  const fem=/(Audrey|Amélie|Amelie|Marie|Flo|Sandy|Shelley|Virginie|Google français|Denise|Julie|Céline|Hortense)/i;
+  frVoice=vs.find(v=>/fr-FR/i.test(v.lang)&&fem.test(v.name))||vs.find(v=>fem.test(v.name))||vs.find(v=>/fr-FR/i.test(v.lang))||vs[0]||null;
+  if(!SPRITE)document.getElementById('voiceInfo').textContent=frVoice?('Voice: '+frVoice.name):'No French voice on this device';
 }
 if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
 function clean(t){return t.replace(/\(.*?\)/g,'').replace(/[…]/g,'').replace(/ \/ /g,'. ').replace(/—/g,'.').trim()}
-function say(t,slow,onend){
-  if(!('speechSynthesis' in window))return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(clean(t));
+function rate(){return parseFloat(document.getElementById('rate').value)}
+function stopAll(){clearInterval(stopTimer);if(spriteAudio)spriteAudio.pause();try{speechSynthesis.cancel()}catch(e){}}
+function ttsSay(c,slow,onend){
+  if(!('speechSynthesis' in window)){onend&&onend();return}
+  const u=new SpeechSynthesisUtterance(c);
   u.lang='fr-FR'; if(frVoice)u.voice=frVoice;
-  u.rate=parseFloat(document.getElementById('rate').value)*(slow?0.6:1);
+  u.rate=rate()*(slow?0.65:1);
   if(onend)u.onend=onend;
   speechSynthesis.speak(u);
+}
+function say(t,slow,onend){
+  const c=clean(t); if(!c)return; stopAll();
+  const seg=SPRITE&&SPRITE[c];
+  if(!seg||!spriteAudio){ttsSay(c,slow,onend);return}
+  const r=Math.max(0.5,Math.min(1.5,rate()*(slow?0.65:1)));
+  const a=spriteAudio, end=seg[0]+seg[1]; a.playbackRate=r;
+  const go=()=>{if(Math.abs(a.currentTime-seg[0])>0.3){ttsSay(c,slow,onend);return}
+    a.play().then(()=>{stopTimer=setInterval(()=>{if(a.currentTime>=end){clearInterval(stopTimer);a.pause();onend&&onend()}},15)}).catch(()=>ttsSay(c,slow,onend))};
+  if(Math.abs(a.currentTime-seg[0])<0.02)go();else{a.addEventListener('seeked',go,{once:true});a.currentTime=seg[0]}
 }
 function sayBtn(text,slow){const b=document.createElement('button');b.className='say'+(slow?' slow':'');b.textContent=slow?'½':'🔊';b.title=slow?'Hear it slowly':'Hear it';b.setAttribute('aria-label',(slow?'Hear slowly: ':'Hear: ')+text);b.onclick=e=>{e.stopPropagation();say(text,slow)};return b}
 function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
@@ -652,7 +666,7 @@ SCRIPT.forEach(([html,speak],i)=>{const s=el('span','s',html+' ');s.tabIndex=0;s
 let scriptIdx=0,scriptOn=false;
 function playNext(){if(!scriptOn||scriptIdx>=SCRIPT.length){scriptOn=false;return}say(SCRIPT[scriptIdx][1],false,()=>{scriptIdx++;setTimeout(playNext,500)})}
 document.getElementById('playScript').onclick=()=>{scriptIdx=0;scriptOn=true;playNext()};
-document.getElementById('stopScript').onclick=()=>{scriptOn=false;speechSynthesis.cancel()};
+document.getElementById('stopScript').onclick=()=>{scriptOn=false;stopAll()};
 
 const QA=[
 ['Comment tu t\'appelles ? / Vous vous appelez comment ?','Je m\'appelle Shivain.'],
@@ -860,6 +874,16 @@ FOLLOW-UP: one follow-up question in French the examiner might ask next.`;
   try{const r=await sampleFn(prompt,{onText:({text})=>{fb.textContent=text},modelTier:'quick'});fb.textContent=r.text;const m=r.text.match(/FULL-MARKS ANSWER:\s*([\s\S]*?)\n\s*SAY IT/i);if(m){const b=el('button','btn','🔊 Hear the full-marks answer');b.style.marginTop='10px';b.onclick=()=>say(m[1].replace(/[*"]/g,''));fb.append(document.createElement('br'),b)}}
   catch(e){fb.textContent=e&&e.code==='not_granted'?'Correction was not allowed. You can allow it from this page\'s Permissions menu.':e&&e.code==='rate_limited'?'Too many requests in a row. Wait a minute and try again.':'The correction failed. Try again in a moment.'}
   finally{document.getElementById('exCheck').disabled=!sampleFn}};
+
+/* ---------- AUDIO INDEX (used to generate audio/sprite) ---------- */
+function allSpeech(){const S=new Set();const add=t=>{const c=clean(t);if(c)S.add(c)};
+  WORDS.forEach(w=>add(w.fr));SCRIPT.forEach(x=>add(x[1]));QA.forEach(([q,a])=>{add(q.split(' / ')[0]);add(el('span','',a).textContent)});
+  RP.forEach(r=>r[1].forEach(l=>add(l[1])));RULES.forEach(r=>r[2].forEach(add));TRAPS.forEach(([w])=>add(w.split(' / ')[0].replace(/:.*/,'')));TW.forEach(add);
+  VERBS.forEach(v=>v.slice(1).forEach(f=>add(f.replace(/ \/ elle| \/ on| \/ elles/g,''))));
+  for(let n=0;n<=101;n++)add(nfr(n));add([62,67,71,75,80,84,89,90,93,98,100,101].map(nfr).join(', '));
+  for(let h=0;h<24;h++)for(const m of [0,5,10,15,20,25,30,40,45,50,55])add(tfr(h,m));
+  SPW.forEach(w=>add(spell(w)));NEG.forEach(x=>{add(x[0]);add(x[1])});DIC.forEach(add);EXQ.forEach(add);
+  return [...S]}
 </script>
 
 </body></html>
