@@ -124,7 +124,7 @@ th{color:var(--muted);font-weight:700;font-size:13px;text-transform:uppercase;le
 <!-- ORAL -->
 <section id="oral" hidden>
   <h2>Your answers, ready to say</h2>
-  <p class="lead">Learn these out loud, not by reading. Tap 🔊 to hear each line, then repeat it right after (shadowing). Parts in <span class="fill">orange</span> are guesses about you: change them to the truth before you memorise.</p>
+  <p class="lead">Learn these out loud, not by reading. Tap 🔊 to hear each line, then repeat it right after (shadowing). These answers use a <b>made-up example student, Alex</b> (20, Canadian, from Toronto, studying in Paris). Swap in your own name, age, city and family before you memorise. Parts in <span class="fill">orange</span> are the easiest bits to personalise.</p>
   <h3>1 · Self-presentation (aim for 60–90 seconds)</h3>
   <div class="panel">
     <div class="row" style="margin-bottom:8px"><button class="btn primary" id="playScript">▶ Play whole presentation</button><button class="btn" id="stopScript">■ Stop</button><span class="muted" style="font-size:13px">Tap any sentence to hear only that one.</span></div>
@@ -187,7 +187,7 @@ th{color:var(--muted);font-weight:700;font-size:13px;text-transform:uppercase;le
     <div class="panel">
       <h3 style="margin-top:0">Spell it (épeler)</h3>
       <p class="muted" style="margin-top:0">Spell the word aloud letter by letter, then reveal and listen.</p>
-      <div class="big" id="spShow" style="font-size:34px">Shivain</div>
+      <div class="big" id="spShow" style="font-size:34px">Alex</div>
       <div class="row"><button class="btn" id="spNew">Next word</button><button class="btn primary" id="spReveal">Reveal + 🔊</button></div>
       <div class="feedback phon" id="spTxt"></div>
     </div>
@@ -322,7 +322,7 @@ Je ne suis pas français.|I am not French.|zhuh nuh swee pa frahn-SAY`,
 "S3 · Séance 3 (29 Sep)": `l'âge|age (m)|LAHZH
 J'ai …|I have …|ZHAY
 un an|a year|uh-NAHN
-J'ai vingt-deux ans.|I am 22 years old.|zhay vant-duh-ZAHN
+J'ai vingt ans.|I am 20 years old.|zhay van-TAHN
 Tu as quel âge ?|How old are you?|tü a kel-LAHZH
 un chiffre|figure, number|uhn SHEEFR
 le numéro|the number|luh nü-may-RO
@@ -451,7 +451,7 @@ l'escrime|fencing|less-KREEM
 le tir à l'arc|archery|luh TEER a LARK
 Je ne fais pas de sport.|I don't do sport.|zhuh nuh feh pa duh SPOR
 Tu aimes chanter ?|Do you like singing?|tü em shahn-TAY
-Moi, c'est Shivain.|Me, I'm Shivain.|MWA seh shee-VAN
+Moi, c'est Alex.|Me, I'm Alex.|MWA seh a-LEX
 Le pays s'appelle l'Inde.|The country is called India.|luh pay-EE sa-PEL LAND
 À côté du café|next to the café (m)|a ko-TAY dü ka-FAY
 À côté de la maison|next to the house (f)|a ko-TAY duh la meh-ZON
@@ -624,7 +624,7 @@ const startTab=(location.hash||'').slice(1);show(tabs.some(b=>b.dataset.tab===st
 
 /* ---------- PLAN ---------- */
 const PLAN=[
-['Sun eve · 45 min','Read the <b>Oral answers</b> tab once. Change every orange part to the truth about you (siblings, mother\'s job, etc.). Write the final self-presentation by hand once.'],
+['Sun eve · 45 min','Read the <b>Oral answers</b> tab once. Swap Alex\'s details for your own (name, age, city, family). Write the final self-presentation by hand once.'],
 ['Sun eve · 30 min','<b>Pronunciation</b> tab: rules 1–6 (silent letters, -ent, liaison, ils sont / ils ont, u vs ou, nasals). Repeat each example 3×.'],
 ['Mon 09:00 · 60 min','<b>Flashcards</b> English → French: S1, S2, S3. Repeat until every card is ✓.'],
 ['Mon 10:15 · 60 min','<b>Flashcards</b>: S4, S5, then Livre U1. Then <b>Drills</b> → Numbers (listen 15×, speak 15×) and the time drill 10×.'],
@@ -644,21 +644,21 @@ PLAN.forEach(([t,txt],i)=>{const s=el('div','slot');s.innerHTML=`<b class="t">${
 /* ---------- ORAL ---------- */
 const SCRIPT=[
 ['Bonjour madame !','Bonjour madame !'],
-['Je m\'appelle Shivain.','Je m\'appelle Shivain.'],
-['Mon prénom, c\'est Shivain : S-H-I-V-A-I-N.','Mon prénom, c\'est Shivain. S, H, I, V, A, I, N.'],
-['J\'ai vingt-deux ans.','J\'ai vingt-deux ans.'],
-['Je suis indien. Je viens de Jammu, en Inde.','Je suis indien. Je viens de Jammu, en Inde.'],
-['J\'habite à Berlin, en Allemagne.','J\'habite à Berlin, en Allemagne.'],
-['Je suis étudiant à l\'ESCP. J\'étudie le management.','Je suis étudiant à l\'E S C P. J\'étudie le management.'],
-['Je parle hindi, anglais, un peu allemand et un peu français.','Je parle hindi, anglais, un peu allemand et un peu français.'],
-['Dans ma famille, il y a <span class="fill">quatre</span> personnes : mon père, ma mère, <span class="fill">ma sœur</span> et moi.','Dans ma famille, il y a quatre personnes : mon père, ma mère, ma sœur et moi.'],
-['Mon père travaille à Jammu.','Mon père travaille à Jammu.'],
+['Je m\'appelle Alex.','Je m\'appelle Alex.'],
+['Mon prénom, c\'est Alex : A-L-E-X.','Mon prénom, c\'est Alex. A, L, E, X.'],
+['J\'ai vingt ans.','J\'ai vingt ans.'],
+['Je suis canadien. Je viens de Toronto, au Canada.','Je suis canadien. Je viens de Toronto, au Canada.'],
+['J\'habite à Paris, en France.','J\'habite à Paris, en France.'],
+['Je suis étudiant à l\'université. J\'étudie le management.','Je suis étudiant à l\'université. J\'étudie le management.'],
+['Je parle anglais, un peu espagnol et un peu français.','Je parle anglais, un peu espagnol et un peu français.'],
+['Dans ma famille, il y a <span class="fill">quatre</span> personnes : mon père, ma mère, <span class="fill">mon frère</span> et moi.','Dans ma famille, il y a quatre personnes : mon père, ma mère, mon frère et moi.'],
+['Mon père travaille à Toronto.','Mon père travaille à Toronto.'],
 ['Ma mère s\'appelle <span class="fill">…</span>. Elle est <span class="fill">très sympathique</span>.','Ma mère s\'appelle … Elle est très sympathique.'],
-['J\'adore le sport. Je joue au tennis de table et au cricket, et je fais de la natation.','J\'adore le sport. Je joue au tennis de table et au cricket, et je fais de la natation.'],
+['J\'adore le sport. Je joue au tennis de table et au foot, et je fais de la natation.','J\'adore le sport. Je joue au tennis de table et au foot, et je fais de la natation.'],
 ['J\'aime aussi écouter de la musique et aller au cinéma.','J\'aime aussi écouter de la musique et aller au cinéma.'],
-['Je n\'aime pas le froid ! À Berlin, il fait froid en novembre.','Je n\'aime pas le froid ! À Berlin, il fait froid en novembre.'],
+['Je n\'aime pas le froid ! À Paris, il fait froid en hiver.','Je n\'aime pas le froid ! À Paris, il fait froid en hiver.'],
 ['Je vais à l\'école en métro.','Je vais à l\'école en métro.'],
-['Cet été, j\'ai envie d\'aller à Paris.','Cet été, j\'ai envie d\'aller à Paris.'],
+['Cet été, j\'ai envie d\'aller à Nice.','Cet été, j\'ai envie d\'aller à Nice.'],
 ['Merci !','Merci !']
 ];
 const sc=document.getElementById('script');
@@ -669,18 +669,18 @@ document.getElementById('playScript').onclick=()=>{scriptIdx=0;scriptOn=true;pla
 document.getElementById('stopScript').onclick=()=>{scriptOn=false;stopAll()};
 
 const QA=[
-['Comment tu t\'appelles ? / Vous vous appelez comment ?','Je m\'appelle Shivain.'],
-['Ça s\'écrit comment ?','S, H, I, V, A, I, N.'],
+['Comment tu t\'appelles ? / Vous vous appelez comment ?','Je m\'appelle Alex.'],
+['Ça s\'écrit comment ?','A, L, E, X.'],
 ['Comment ça va ?','Ça va bien, merci. Et vous ?'],
-['Tu as quel âge ?','J\'ai vingt-deux ans.'],
-['Quelle est ta nationalité ?','Je suis indien.'],
-['Tu viens d\'où ?','Je viens de Jammu, en Inde. C\'est dans le nord de l\'Inde.'],
-['Tu habites où ?','J\'habite à Berlin, en Allemagne.'],
-['Quelle est ta profession ? / Tu fais quoi ?','Je suis étudiant. J\'étudie le management à l\'ESCP.'],
-['Tu parles quelles langues ?','Je parle hindi, anglais, un peu allemand et un peu français.'],
-['Tu as des frères et sœurs ?','Oui, j\'ai <span class="fill">une sœur</span>. Elle s\'appelle <span class="fill">…</span>. / Non, je n\'ai pas de frères et sœurs.'],
-['Parle-moi de ta famille.','Mon père travaille à Jammu. Ma mère s\'appelle <span class="fill">…</span>. J\'ai aussi des cousins et des cousines.'],
-['Qu\'est-ce que tu aimes faire ?','J\'adore le sport : je joue au tennis de table et au cricket. J\'aime aussi la musique.'],
+['Tu as quel âge ?','J\'ai vingt ans.'],
+['Quelle est ta nationalité ?','Je suis canadien.'],
+['Tu viens d\'où ?','Je viens de Toronto, au Canada. C\'est une grande ville.'],
+['Tu habites où ?','J\'habite à Paris, en France.'],
+['Quelle est ta profession ? / Tu fais quoi ?','Je suis étudiant. J\'étudie le management à l\'université.'],
+['Tu parles quelles langues ?','Je parle anglais, un peu espagnol et un peu français.'],
+['Tu as des frères et sœurs ?','Oui, j\'ai <span class="fill">un frère</span>. Il s\'appelle <span class="fill">Tom</span>. / Non, je n\'ai pas de frères et sœurs.'],
+['Parle-moi de ta famille.','Mon père travaille à Toronto. Ma mère s\'appelle <span class="fill">Julie</span>. J\'ai aussi des cousins et des cousines.'],
+['Qu\'est-ce que tu aimes faire ?','J\'adore le sport : je joue au tennis de table et au foot. J\'aime aussi la musique.'],
 ['Quel est ton sport préféré ?','Mon sport préféré, c\'est le tennis de table. Je joue depuis l\'école.'],
 ['Qu\'est-ce que tu n\'aimes pas ?','Je n\'aime pas le froid et je déteste le ski !'],
 ['Tu fais quoi le week-end ?','Le week-end, je fais du sport et je vais au cinéma avec mes amis.'],
@@ -688,16 +688,16 @@ const QA=[
 ['Quelle heure est-il ?','Il est dix heures et quart. / Il est dix heures quinze.'],
 ['Tu vas à l\'école comment ?','J\'y vais en métro. / Je prends le métro.'],
 ['Il fait quel temps aujourd\'hui ?','Aujourd\'hui, il fait froid et il pleut. Il fait cinq degrés.'],
-['Tu aimes Berlin ?','Oui, j\'aime Berlin. C\'est une ville agréable, mais il fait froid !'],
-['Qu\'est-ce que tu as envie de faire cet été ?','J\'ai envie d\'aller en France, à Paris. J\'y vais en train.'],
+['Tu aimes Paris ?','Oui, j\'aime Paris. C\'est une ville agréable, mais il fait froid en hiver !'],
+['Qu\'est-ce que tu as envie de faire cet été ?','J\'ai envie d\'aller en Belgique, à Bruxelles. J\'y vais en train.'],
 ['Tu connais quels pays francophones ?','Je connais la France, la Belgique, la Suisse, le Canada, le Sénégal et le Maroc.'],
-['Où est ton école ?','Mon école est à Berlin, près du parc. <span class="fill">À côté de l\'école, il y a un supermarché.</span>'],
+['Où est ton école ?','Mon école est à Paris, près du parc. <span class="fill">À côté de l\'école, il y a un supermarché.</span>'],
 ['Quel est ton numéro de téléphone ?','C\'est le zéro, un, sept, six… (say the digits one by one, slowly)'],
-['Présente ton voisin / ta voisine.','Elle, c\'est Sofia. Elle est italienne. Elle est étudiante à l\'ESCP.'],
-['Est-ce que tu es américain ?','Non, je ne suis pas américain. Je suis indien.'],
-['Quelle est la couleur du drapeau indien ?','Le drapeau indien est orange, blanc et vert. Il y a une roue bleue au centre.'],
+['Présente ton voisin / ta voisine.','Elle, c\'est Sofia. Elle est italienne. Elle est étudiante à l\'université.'],
+['Est-ce que tu es américain ?','Non, je ne suis pas américain. Je suis canadien.'],
+['Quelle est la couleur du drapeau canadien ?','Le drapeau canadien est rouge et blanc. Il y a une feuille rouge au centre.'],
 ['Quelle est ta couleur préférée ?','Ma couleur préférée, c\'est le bleu.'],
-['Dans ta ville d\'origine, il y a une église ?','Oui, il y a une église. Il y a aussi des temples, des magasins et un supermarché. / Non, il n\'y a pas d\'église.'],
+['Dans ta ville d\'origine, il y a une église ?','Oui, il y a une église. Il y a aussi un musée, des magasins et un supermarché. / Non, il n\'y a pas d\'église.'],
 ['Où se trouve l\'école ?','L\'école se trouve à côté du parc, en face de la gare. Ce n\'est pas loin.'],
 ['Tu fais du sport ?','Oui, je fais du sport. Je fais de la natation et je joue au tennis de table.'],
 ['Tu aimes chanter ?','Non, je n\'aime pas chanter, mais j\'aime écouter de la musique.'],
@@ -769,7 +769,7 @@ const RULES=[
 const rulesBox=document.getElementById('rules');
 RULES.forEach(([t,p,ex])=>{const r=el('div','rule');r.append(el('h4','',t),el('p','',p));const e=el('div','ex');ex.forEach(x=>{const pill=el('span','pill');pill.append(sayBtn(x),el('span','',esc(x)));e.appendChild(pill)});r.appendChild(e);rulesBox.appendChild(r)});
 const TRAPS=[
-['femme','"FAM" (not "fem")'],['monsieur','"muh-SYUH" (the on is "uh", r silent)'],['fils','"FEESS" (l silent, s heard)'],['six / six ans / six livres','"SEESS" alone · "see-ZAHN" · "see LEEVR"'],['dix-huit / dix-neuf','"dee-ZWEET" · "deez-NUHF"'],['neuf ans','"nuh-VAHN" (f becomes v)'],['vingt / vingt-deux','"VAN" · "vant-DUH" (t heard from 21 to 29)'],['soixante','"swa-SAHNT" (x = s)'],['deuxième / sixième','"duh-ZYEM" · "see-ZYEM"'],['les États-Unis','"lay-zay-ta-zü-NEE"'],['l\'Allemagne','"lal-MAN-yuh"'],['aujourd\'hui','"oh-zhoor-DWEE"'],['la question','"kes-TYON" (exception: t, not s)'],['l\'équitation','"lay-kee-ta-SYON"'],['le musée','"mü-ZAY" (u, not ou)'],['la sœur','"SUR" with rounded lips'],['oncle','"ONKL"'],['cousin / cousine','"koo-ZAN" / "koo-ZEEN"'],['je voudrais','"zhuh voo-DREH"'],['s\'il vous plaît','"seel voo PLEH"'],['Je suis','"zhuh SWEE"'],['l\'hôpital','"lo-pee-TAL" (h silent)'],['les toilettes','"lay twa-LET"'],['un portefeuille','"port-FUH-y"'],['quelle heure','"kel-UR"'],['Excusez-moi','"ex-kü-zay-MWA"'],['ESCP','"uh-ESS-say-PAY" (French letters: E=uh, S=ess, C=say, P=pay)'],['ça s\'écrit','"sa say-KREE"'],['l\'alphabet: E / I / G / J','E = "uh" · I = "ee" · G = "zhay" · J = "zhee"'],['R / U / Y / W','R = "air" · U = "ü" · Y = "ee-GREK" · W = "doo-bluh-VAY"']
+['femme','"FAM" (not "fem")'],['monsieur','"muh-SYUH" (the on is "uh", r silent)'],['fils','"FEESS" (l silent, s heard)'],['six / six ans / six livres','"SEESS" alone · "see-ZAHN" · "see LEEVR"'],['dix-huit / dix-neuf','"dee-ZWEET" · "deez-NUHF"'],['neuf ans','"nuh-VAHN" (f becomes v)'],['vingt / vingt-deux','"VAN" · "vant-DUH" (t heard from 21 to 29)'],['soixante','"swa-SAHNT" (x = s)'],['deuxième / sixième','"duh-ZYEM" · "see-ZYEM"'],['les États-Unis','"lay-zay-ta-zü-NEE"'],['l\'Allemagne','"lal-MAN-yuh"'],['aujourd\'hui','"oh-zhoor-DWEE"'],['la question','"kes-TYON" (exception: t, not s)'],['l\'équitation','"lay-kee-ta-SYON"'],['le musée','"mü-ZAY" (u, not ou)'],['la sœur','"SUR" with rounded lips'],['oncle','"ONKL"'],['cousin / cousine','"koo-ZAN" / "koo-ZEEN"'],['je voudrais','"zhuh voo-DREH"'],['s\'il vous plaît','"seel voo PLEH"'],['Je suis','"zhuh SWEE"'],['l\'hôpital','"lo-pee-TAL" (h silent)'],['les toilettes','"lay twa-LET"'],['un portefeuille','"port-FUH-y"'],['quelle heure','"kel-UR"'],['Excusez-moi','"ex-kü-zay-MWA"'],['SNCF','"ess-enn-say-EFF" (French letters: S=ess, N=enn, C=say, F=eff)'],['ça s\'écrit','"sa say-KREE"'],['l\'alphabet: E / I / G / J','E = "uh" · I = "ee" · G = "zhay" · J = "zhee"'],['R / U / Y / W','R = "air" · U = "ü" · Y = "ee-GREK" · W = "doo-bluh-VAY"']
 ];
 const trapBox=document.getElementById('traps');
 TRAPS.forEach(([w,h])=>{const i=el('div','item');i.append(sayBtn(w.split(' / ')[0].replace(/:.*/,'')),el('div','',`<span class="f">${esc(w)}</span> <span class="phon">${esc(h)}</span>`));trapBox.appendChild(i)});
@@ -792,11 +792,11 @@ document.getElementById('numIn').onkeydown=e=>{if(e.key==='Enter')document.getEl
 let shown=47;
 document.getElementById('teacherNums').onclick=()=>say([62,67,71,75,80,84,89,90,93,98,100,101].map(nfr).join(', '));
 const LN={a:'a',b:'bé',c:'cé',d:'dé',e:'e',f:'effe',g:'gé',h:'ache',i:'i',j:'ji',k:'ka',l:'elle',m:'emme',n:'enne',o:'o',p:'pé',q:'cu',r:'erre',s:'esse',t:'té',u:'u',v:'vé',w:'double vé',x:'ixe',y:'i grec',z:'zède'};
-const SPW=['Shivain','Jammu','Berlin','Inde','ESCP','Paris','famille','français','indien','Allemagne','cousine','natation','cricket','question','bibliothèque'];
+const SPW=['Alex','Toronto','Canada','Inde','Berlin','Paris','famille','français','indien','Allemagne','cousine','natation','cricket','question','bibliothèque'];
 function spell(w){return [...w.toLowerCase()].map(c=>{const b=c.normalize('NFD');const base=b[0];const acc=b.includes('́')?' accent aigu':b.includes('̀')?' accent grave':b.includes('̂')?' accent circonflexe':b.includes('̧')?' cédille':'';return (LN[base]||base)+acc}).join(', ')}
 document.getElementById('spNew').onclick=()=>{document.getElementById('spShow').textContent=SPW[Math.floor(Math.random()*SPW.length)];document.getElementById('spTxt').textContent=''};
 document.getElementById('spReveal').onclick=()=>{const s=spell(document.getElementById('spShow').textContent);document.getElementById('spTxt').textContent=s;say(s)};
-const NEG=[['Est-ce que tu es américain ?','Non, je ne suis pas américain. Je suis indien.'],['Est-ce que tu es espagnol ?','Non, je ne suis pas espagnol.'],['Est-ce que tu parles italien ?','Non, je ne parle pas italien.'],['Est-ce que tu as dix-huit ans ?','Non, je n\'ai pas dix-huit ans. J\'ai vingt-deux ans.'],['Est-ce que tu t\'appelles Emily ?','Non, je ne m\'appelle pas Emily. Je m\'appelle Shivain.'],['Tu fais de l\'escrime ?','Non, je ne fais pas d\'escrime.'],['Tu fais du sport ?','Oui, je fais du sport. / Non, je ne fais pas de sport.'],['Tu aimes chanter ?','Non, je n\'aime pas chanter.'],['Tu as une voiture ?','Non, je n\'ai pas de voiture.'],['Tu habites à Paris ?','Non, je n\'habite pas à Paris. J\'habite à Berlin.'],['Il y a un musée dans ta rue ?','Non, il n\'y a pas de musée dans ma rue.'],['Tu as des frères ?','Non, je n\'ai pas de frères.']];
+const NEG=[['Est-ce que tu es américain ?','Non, je ne suis pas américain. Je suis canadien.'],['Est-ce que tu es espagnol ?','Non, je ne suis pas espagnol.'],['Est-ce que tu parles italien ?','Non, je ne parle pas italien.'],['Est-ce que tu as dix-huit ans ?','Non, je n\'ai pas dix-huit ans. J\'ai vingt ans.'],['Est-ce que tu t\'appelles Emily ?','Non, je ne m\'appelle pas Emily. Je m\'appelle Alex.'],['Tu fais de l\'escrime ?','Non, je ne fais pas d\'escrime.'],['Tu fais du sport ?','Oui, je fais du sport. / Non, je ne fais pas de sport.'],['Tu aimes chanter ?','Non, je n\'aime pas chanter.'],['Tu as une voiture ?','Non, je n\'ai pas de voiture.'],['Tu habites à Londres ?','Non, je n\'habite pas à Londres. J\'habite à Paris.'],['Il y a un musée dans ta rue ?','Non, il n\'y a pas de musée dans ma rue.'],['Tu as des frères ?','Non, je n\'ai pas de frères.']];
 let ng=NEG[0];document.getElementById('ngShow').textContent=ng[0];
 document.getElementById('ngNew').onclick=()=>{ng=NEG[Math.floor(Math.random()*NEG.length)];document.getElementById('ngShow').textContent=ng[0];document.getElementById('ngTxt').textContent='';say(ng[0])};
 document.getElementById('ngReveal').onclick=()=>{document.getElementById('ngTxt').textContent=ng[1];say(ng[1])};
@@ -832,11 +832,11 @@ const GC=[
 ['Negation: ne … pas / plus / jamais / rien','<b>Je <u>ne</u> suis <u>pas</u> français.</b> Before a vowel: <b>Je <u>n\'</u>aime <u>pas</u> le ski.</b><br>ne … plus (no longer) · ne … jamais (never) · ne … rien (nothing).<br><b>Trap:</b> un / une / des / du / de la → <b>de (d\')</b>: J\'ai <i>un</i> frère → Je n\'ai <i>pas de</i> frère. Il n\'y a <i>pas de</i> livre.'],
 ['Articles','<b>Definite</b> (the): le (m) · la (f) · l\' (vowel) · les (pl).<br><b>Indefinite</b> (a / some): un (m) · une (f) · des (pl).<br>After aimer / adorer / détester use <b>le / la / les</b>: J\'aime <i>la</i> musique. J\'adore <i>le</i> sport.'],
 ['Countries: le / la / les + à / en / au / aux','Ends in -e = feminine: <b>la</b> France, <b>en</b> France. Masculine: <b>le</b> Canada, <b>au</b> Canada. Plural: <b>les</b> États-Unis, <b>aux</b> États-Unis. Vowel: <b>l\'</b>Inde, <b>en</b> Inde. City: <b>à</b> Berlin.<br>Coming from: <b>de</b> France · <b>d\'</b>Inde · <b>du</b> Canada · <b>des</b> États-Unis. (Exception: le Mexique.)'],
-['Adjective agreement','Feminine: + e (français → française) · -ien → -ienne · -ain → -aine · -eux → -euse · -e stays (belge, suisse, sympathique). Plural: + s (silent).<br><b>Shivain says:</b> Je suis <b>indien</b>. A woman says: Je suis <b>indienne</b>.'],
+['Adjective agreement','Feminine: + e (français → française) · -ien → -ienne · -ain → -aine · -eux → -euse · -e stays (belge, suisse, sympathique). Plural: + s (silent).<br>A man says: Je suis <b>indien</b>. A woman says: Je suis <b>indienne</b>.'],
 ['Faire du / de la · Jouer au / à la','faire + <b>du</b> (m) / <b>de la</b> (f) / <b>de l\'</b> / <b>des</b>: je fais <i>du</i> sport, <i>de la</i> natation, <i>de l\'</i>athlétisme.<br>jouer + <b>au</b> / <b>à la</b> (games &amp; ball sports): je joue <i>au</i> tennis, <i>au</i> cricket, <i>au</i> foot.<br>aller + <b>au</b> / <b>à la</b> / <b>à l\'</b> / <b>aux</b>: je vais <i>au</i> cinéma, <i>à la</i> piscine, <i>à l\'</i>école.'],
 ['Possessives (mon, ma, mes)','à moi: <b>mon</b> père · <b>ma</b> mère · <b>mes</b> parents<br>à toi: ton / ta / tes · à lui/elle: son / sa / ses<br>nous: notre / nos · vous: votre / vos · ils: leur / leurs<br><b>Trap:</b> feminine noun with a vowel takes mon: <b>mon amie</b>, <b>mon école</b>.'],
 ['Asking questions','Rising voice: <b>Tu aimes Paris ↗ ?</b><br><b>Est-ce que</b> tu aimes Paris ? (yes / no)<br><b>Qu\'est-ce que</b> tu fais ? (open answer)<br><b>quel / quelle / quels / quelles</b>: Quel âge ? Quelle nationalité ? Quels pays ? Quelles langues ?<br>Où ? Quand ? Comment ? Combien ? Qui ? Pourquoi ? À quelle heure ?'],
-['Pronouns & "y"','Subject: je, tu, il, elle, on (= nous, verb like il), nous, vous, ils, elles.<br>Stressed: <b>moi</b>, toi, <b>lui</b>, <b>elle</b>, nous, vous, eux, elles — <i>Moi, je m\'appelle Shivain. Et toi ?</i> · <i>Lui, c\'est Paul.</i><br><b>y</b> replaces a place: Tu vas à Paris ? — Oui, j\'<b>y</b> vais en train.'],
+['Pronouns & "y"','Subject: je, tu, il, elle, on (= nous, verb like il), nous, vous, ils, elles.<br>Stressed: <b>moi</b>, toi, <b>lui</b>, <b>elle</b>, nous, vous, eux, elles — <i>Moi, je m\'appelle Alex. Et toi ?</i> · <i>Lui, c\'est Paul.</i><br><b>y</b> replaces a place: Tu vas à Paris ? — Oui, j\'<b>y</b> vais en train.'],
 ['Prepositions of place','dans · sur ≠ sous · devant ≠ derrière · à côté de · en face de · près de ≠ loin de · entre · à droite de ≠ à gauche de.<br>de + le = <b>du</b>: à côté <i>du</i> parc · de + les = <b>des</b>: près <i>des</i> magasins · de la, de l\' don\'t change.'],
 ['C\'est vs Il est','<b>C\'est</b> + name / un-une: C\'est Omar Sy. C\'est un stylo. C\'est une ville agréable.<br><b>Il / Elle est</b> + adjective or profession (no article): Il est français. Elle est actrice.']
 ];
@@ -862,9 +862,9 @@ let sampleFn=null;
 document.getElementById('exCheck').onclick=async()=>{
   const ans=document.getElementById('exIn').value.trim();if(!ans||!sampleFn)return;
   const fb=document.getElementById('exFb');fb.textContent='Correcting…';document.getElementById('exCheck').disabled=true;
-  const prompt=`You are a kind but strict French teacher examining an A1.1 oral exam (textbook Édito A1, units 1-3: introductions, nationality, age, family, likes/dislikes, sports, objects, time, directions, city, weather, transport). The student is a 22-year-old Indian male ESCP student in Berlin.
+  const prompt=`You are a kind but strict French teacher examining an A1.1 oral exam (textbook Édito A1, units 1-3: introductions, nationality, age, family, likes/dislikes, sports, objects, time, directions, city, weather, transport). The student is an A1 beginner (a university student).
 Question asked: "${exq}"
-Student's answer (typed transcript of what he would say): "${ans}"
+Student's answer (typed transcript of what they would say): "${ans}"
 Reply in English with exactly these sections, short:
 SCORE: x/10 (A1.1 level)
 MISTAKES: bullet list of each error -> correction with a 1-line reason (gender, agreement, verb form, article, negation, word order). Say "None" if none.
